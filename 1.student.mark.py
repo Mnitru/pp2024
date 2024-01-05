@@ -1,65 +1,63 @@
-# Initialize empty lists to store students and courses
 students = []
 courses = []
 
-def input_student_info():
-    id = input("Enter student ID: ")
-    name = input("Enter student name: ")
-    dob = input("Enter student Date of Birth (YYYY-MM-DD): ")
+def input_number_of_students():
+    return int(input("Number of students: "))
+
+def input_student_information():
+    id = input("id: ")
+    name = input("name: ")
+    dob = int(input("Date of Birth (YYYY-MM-DD): "))
+    while dob > 20240101 or dob < 19140101 :
+            print("Please enter again")
+            dob = int(input("Date of Birth (YYYY-MM-DD): "))
     return (id, name, dob, {})
 
-def input_course_info():
-    id = input("Enter course ID: ")
-    name = input("Enter course name: ")
+def input_number_of_courses():
+    return int(input("number of courses: "))
+
+def input_course_information():
+    id = input("course ID: ")
+    name = input("course name: ")
     return (id, name)
 
-def input_marks():
-    student_id = input("Enter student ID: ")
-    course_id = input("Enter course ID: ")
-    mark = input("Enter mark for the student: ")
+def input_marks(students, courses):
+    list_students(students)
+    student_id = input("Select a student ID: ")
+    list_courses(courses)
+    course_id = input("Select a course ID: ")
+    mark = int(input("Enter mark for the student: "))
+    while mark > 10 or mark < 0:
+        print("please enter again:")
+        mark = int(input("Enter mark for the student: "))
     for student in students:
         if student[0] == student_id:
             student[3][course_id] = mark
-            print("Mark added successfully.")
+            print("successfully.")
             return
     print("Student not found.")
 
-def list_students():
-    for student in students:
-        print(f"ID: {student[0]}, Name: {student[1]}, DoB: {student[2]}")
-
-def list_courses():
+def list_courses(courses):
+    print("List of Courses:")
     for course in courses:
         print(f"ID: {course[0]}, Name: {course[1]}")
 
-def show_student_marks():
-    student_id = input("Enter student ID: ")
-    course_id = input("Enter course ID: ")
+def list_students(students):
+    print("List of Students:")
     for student in students:
-        if student[0] == student_id:
-            mark = student[3].get(course_id)
-            if mark is not None:
-                print(f"Student ID: {student_id}, Course ID: {course_id}, Mark: {mark}")
-                return
-            else:
-                print("No mark found for this student and course.")
-                return
-    print("Student not found.")
+        print(f"ID: {student[0]}, Name: {student[1]}, DoB: {student[2]}")    
 
-num_students = int(input("Enter number of students: "))
+num_students = input_number_of_students()
 for _ in range(num_students):
-    students.append(input_student_info())
+    students.append(input_student_information())
 
-num_courses = int(input("Enter number of courses: "))
+num_courses = input_number_of_courses()
 for _ in range(num_courses):
-    courses.append(input_course_info())
+    courses.append(input_course_information())
 
-input_marks()
+input_marks(students, courses)
 
-print("\nList of students:")
-list_students()
+list_students(students)
 
-print("\nList of courses:")
-list_courses()
+list_courses(courses)
 
-show_student_marks()
