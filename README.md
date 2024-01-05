@@ -7,7 +7,7 @@ Students are expected to:
 
 
 Student Info
-=========================
+========================
 
 * Student Name: LE QUOC TRUNG   
 * Student ID: BA12-177
